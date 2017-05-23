@@ -3,12 +3,10 @@ const cookieParser  = require('cookie-parser');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
+const session = require('express-session');
 
 const app = express();
 
-app.get('/',(req,res) => {
-	res.render('index');
-});
 
 
 app.locals.title = "Tv Ville"
@@ -23,6 +21,16 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(methodOverride());
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+
+}));
+
+
+require('./routes/index.js')(app);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -40,5 +48,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+
 
 module.exports = app ;

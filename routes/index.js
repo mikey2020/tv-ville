@@ -1,4 +1,5 @@
-
+const baseUrl = "http://api.tvmaze.com";
+const request = require('request');
 module.exports = (app) => {
 
 	app.get('/',(req,res) => {
@@ -8,13 +9,12 @@ module.exports = (app) => {
 			}
 			
 			req.session.log = new Date();
-			
+
 			res.render('index',{
-				name: req.user.username,
-				log: req.session.log
+				username: req.user.username,
+				log: req.session.log,
+				data: ""
 			});
-
-
 		}
 
 		else{
@@ -23,5 +23,32 @@ module.exports = (app) => {
 		
 	});
 
+	app.post('/',(req,res) => {
+		console.log(req.body.query);
+
+		request(baseUrl + "/search/shows?q=" + req.body.query,function(err,resp,body){
+		    if(err){
+		      console.log("There was problem during connection");
+		    }
+		    console.log("running");
+		    let data = JSON.parse(resp.body);
+		 	//var StrippedString = OriginalString.replace(/(<([^>]+)>)/ig,"");
+		 	console.log(data);
+		    res.render('index',{
+		    	username: req.user.username,
+				log: req.session.log,
+				data: data
+			});
+ 
+		});
+
+		//console.log(data);
+		
+		
+	});
+
+
 };
+
+//baseUrl + "/search/shows?q=" + req.body.query
 

@@ -4,9 +4,11 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
-
+const passport = require('passport');
+const pass = require('./passport');
+const db = require('./db');
 const app = express();
-
+const auth = pass();
 
 
 app.locals.title = "Tv Ville"
@@ -29,8 +31,12 @@ app.use(session({
 
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./routes/index.js')(app);
+
+require('./routes/users.js')(app);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

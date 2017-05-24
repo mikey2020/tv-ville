@@ -5,6 +5,14 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+  <% if(name) { %>
+    <p> Hi <%=name%></p>
+  <% } %>
    <h1> Welcome to <%=title%></h1>
+
+   <form method="POST" action="/">
+     <input type="text" name="query">
+     <button>Search</button>
+   </form>
   </body>
 </html>

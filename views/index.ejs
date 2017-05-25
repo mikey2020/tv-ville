@@ -7,16 +7,23 @@
   <% include temps/header.ejs%>
   <body>
   <% if(username) { %>
-    <p> Hi <%=username%></p>
+    <p class="btn btn-primary"> Hi <strong><%=username%></strong></p>
   <% } %>
-   <h1> Welcome to <%=title%></h1>
+   <h1 class="well"> Welcome to <%=title%></h1>
 
-  <p>Search for your favourite shows</p>
+  <p class="well well-sm">Search for your favourite shows</p>
 
    <form method ="POST" action="/" >
-     <input type="text" name="query">
-     <button>Search</button>
+   <div class="input-group">
+     <input type="text" name="query" class="form-control" placeholder="Search">
+     <div class="input-group-btn">
+       <button class="btn btn-default">
+        <i class="glyphicon glyphicon-search"></i>
+       </button>
+     </div>
+   </div>
    </form>
+ 
 
   
     <%for(let x in data) { %>
@@ -29,6 +36,7 @@
         <%if(data[x].show.image ) {%>
             <p><img src=<%=data[x].show.image.medium%>></p>
         <% } %>
+        <p><%data[x].show.id%></p>
         <br>
       </div>
     </div>

@@ -12,15 +12,15 @@
 
   <p>Search for your favourite shows</p>
 
-   <form method ="POST" action="/">
+   <form method ="POST" action="/" >
      <input type="text" name="query">
      <button>Search</button>
    </form>
 
   <%for(let x in data) { %>
     <p><%=data[x].show.name%></p>
-    <p><%=data[x].show.summary%></p>
-    <%if(typeof data[x].show.image != "object") {%>
+    <p><%=data[x].show.summary.replace(/(<([^>]+)>)/ig,"")%></p>
+    <%if(data[x].show.image ) {%>
         <p><img src=<%=data[x].show.image.medium%>></p>
     <% } %>
   <%}%>

@@ -4,15 +4,24 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
+  <% include temps/header.ejs %>
   <body>
    <h1> <%=title%> Log In</h1>
    <%for(let message in messages){%>
       <p><%=messages[message]%></p>
     <%}%>
-   <form method="POST" action="/login">
-   		<input type="text" name="username" placeholder="Username" required="required"><br>
-   		<input type="password" name="password" placeholder="Password"><br>
-   		<input type="submit" name="submit" value="login">
+   <form method="POST" action="/login" role="form">
+      <div class="col-sm-10">
+        <input type="text" name="username" placeholder="Username" required="required" class="form-control"><br>
+      </div>
+      <div class="col-sm-10">
+        <input type="password" name="password" placeholder="Password" class="form-control" id="pwd"><br>
+      </div>
+   		<div class="form group"> 
+        <div class="col-sm-10">
+   		     <input type="submit" name="submit" value="login" class="btn btn-default">
+        </div>
+      </div>
    </form>
   </body>
 </html>

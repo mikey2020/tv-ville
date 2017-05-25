@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('connect-flash');
 const pass = require('./passport');
 const db = require('./db');
 const app = express();
@@ -33,6 +34,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(flash());
 
 require('./routes/index.js')(app);
 

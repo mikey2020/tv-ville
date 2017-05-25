@@ -6,6 +6,9 @@
   </head>
   <body>
    <h1> <%=title%> Log In</h1>
+   <%for(let message in messages){%>
+      <p><%=messages[message]%></p>
+    <%}%>
    <form method="POST" action="/login">
    		<input type="text" name="username" placeholder="Username" required="required"><br>
    		<input type="password" name="password" placeholder="Password"><br>

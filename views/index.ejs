@@ -4,6 +4,7 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
+  <% include temps/header.ejs%>
   <body>
   <% if(username) { %>
     <p> Hi <%=username%></p>
@@ -17,12 +18,20 @@
      <button>Search</button>
    </form>
 
-  <%for(let x in data) { %>
-    <p><%=data[x].show.name%></p>
-    <p><%=data[x].show.summary.replace(/(<([^>]+)>)/ig,"")%></p>
-    <%if(data[x].show.image ) {%>
-        <p><img src=<%=data[x].show.image.medium%>></p>
-    <% } %>
-  <%}%>
+  
+    <%for(let x in data) { %>
+    <div class="container">
+      <div class="jumbotron">
+        <p><%=data[x].show.name%></p>
+        <% if( typeof data[x].show.summary == "string") {%>
+          <p><%=data[x].show.summary.replace(/(<([^>]+)>)/ig,"")%></p>
+        <%}%>
+        <%if(data[x].show.image ) {%>
+            <p><img src=<%=data[x].show.image.medium%>></p>
+        <% } %>
+        <br>
+      </div>
+    </div>
+    <%}%>
   </body>
 </html>
